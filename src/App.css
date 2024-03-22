@@ -1,0 +1,80 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 72px;
+  align-items: center;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 20px 20px;
+}
+:root {
+  --red: #d01c28;
+  --gray: #808080; /* You can choose any shade of gray you prefer */
+}
+
+* {
+  margin: 0;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+
+button {
+  all: unset;
+  padding: 6px 16px;
+  height: 32px;
+  background: var(--red);
+  color: white;
+  font-weight: 500;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  height: calc(100vh-72vh);
+}
+
+.hero h1 {
+  font-weight: 800;
+  line-height: 82px;
+  font-size: 80px;
+}
+
+.hero p {
+  font-weight: 600;
+  color: var(--gray);
+  max-width: 400px;
+}
+
+.hero-btn {
+  display: flex;
+  gap: 40px;
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--gray);
+  border: 1px solid gray;
+}
+
+.shopping p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.brands-item {
+  display: flex;
+  gap: 16px;
+}
