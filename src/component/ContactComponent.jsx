@@ -1,5 +1,3 @@
-import React from "react";
-
 function ContactComponent() {
   // Static contact details
   const name = "Nike Store Customer Care";
