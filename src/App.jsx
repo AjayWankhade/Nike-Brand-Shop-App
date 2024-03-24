@@ -6,6 +6,7 @@ import Location from "./component/LocationComponent";
 import Contact from "./component/ContactComponent";
 import About from "./component/AboutComponent";
 import Login from "./component/LoginComponent";
+import Register from "./component/RegisterComponent";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/contact" Component={Contact}></Route>
             <Route path="/location" Component={Location}></Route>
             <Route path="/login" Component={Login}></Route>
+            <Route path="/register" Component={Register}></Route>
           </Routes>
         </div>
       </BrowserRouter>
