@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify"; // Import ToastContainer
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import HeroSection from "./component/HeroSection";
 import Navigation from "./component/Navigation";
@@ -14,13 +16,14 @@ function App() {
       <BrowserRouter>
         <div>
           <Navigation />
+          <ToastContainer /> {/* Add ToastContainer here */}
           <Routes>
-            <Route path="/" exact Component={HeroSection}></Route>
-            <Route path="/about" Component={About}></Route>
-            <Route path="/contact" Component={Contact}></Route>
-            <Route path="/location" Component={Location}></Route>
-            <Route path="/login" Component={Login}></Route>
-            <Route path="/register" Component={Register}></Route>
+            <Route path="/" exact element={<HeroSection />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/location" element={<Location />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
       </BrowserRouter>
