@@ -1,4 +1,4 @@
-**** Frontend Technologies Used **** :
+**** Nike Brand shoe React App **** :
 
 React: Frontend development framework for building user interfaces.
 React Router: Routing library for navigating between different views.
