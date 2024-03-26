@@ -1,0 +1,19 @@
+# client :
+
+# Start: npm run dev
+
+# backend:
+
+# start:nodemon index.js
+
+# git:
+
+# git pull origin ajay-branch
+
+# git add .
+
+# git commit -m "message"
+
+# git push origin ajay_branch:ajay-branch
+
+# git pull origin ajay-branch
