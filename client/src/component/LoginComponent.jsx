@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function LoginComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function handleEmail(e) {
     setEmail(e.target.value);
@@ -26,6 +28,7 @@ function LoginComponent() {
         console.log("Login Successful", response.data);
         // Display success toast notification
         toast.success("Login successful!");
+        navigate("/product");
       })
       .catch((err) => {
         console.log("error occurred", err.response.data);
