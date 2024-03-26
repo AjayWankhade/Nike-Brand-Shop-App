@@ -1,30 +1,29 @@
-import { Link, useLocation } from "react-router-dom"; // Import useLocation hook
+import { Link, useLocation } from "react-router-dom";
 
 function Navigation() {
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
 
-  // Define an array of paths where the navigation bar should be hidden
   const hiddenPaths = ["/login", "/register"];
 
-  // Check if the current path is included in the hiddenPaths array
   const isHidden = hiddenPaths.includes(location.pathname);
 
-  // Render the navigation bar only if the current path is not included in the hiddenPaths array
   if (isHidden) {
     return null;
   }
 
-  // Render the navigation bar otherwise
   return (
     <>
       <nav className="container">
         <div className="logo">
-          <img src="/images/brand_logo.png" alt="brand"></img>
+          <a href="https://www.nike.com/in/">
+            {" "}
+            <img src="/images/brand_logo.png" alt="brand"></img>
+          </a>
         </div>
 
         <ul>
           <Link to="/">Menu</Link>
-          <Link to="/about">About</Link>
+          <a href="https://about.nike.com/en">About</a>
           <Link to="product">Product</Link>
           <Link to="contact">Contact</Link>
         </ul>

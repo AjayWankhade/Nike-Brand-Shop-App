@@ -12,6 +12,7 @@ nav {
   margin: 0 auto;
   padding: 20px 20px 20px;
 }
+
 :root {
   --red: #d01c28;
   --gray: #808080; /* You can choose any shade of gray you prefer */
@@ -20,6 +21,7 @@ nav {
 * {
   margin: 0;
 }
+
 nav ul {
   display: flex;
   list-style: none;
@@ -28,11 +30,19 @@ nav ul {
 
 button {
   all: unset;
-  padding: 6px 16px;
-  height: 32px;
+  padding: 10px;
   background: var(--red);
   color: white;
   font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 .hero {
@@ -74,6 +84,7 @@ button {
   flex-direction: column;
   gap: 36px;
 }
+
 .brands-item {
   display: flex;
   gap: 16px;
@@ -126,21 +137,21 @@ input[type="password"] {
   border-radius: 3px;
 }
 
-button {
-  width: calc(100% - 20px);
+button[type="submit"] {
+  width: 93%;
   padding: 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
-  text-align: center;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+button[type="submit"]:hover {
   background-color: #0056b3;
 }
+
 .register-link {
   text-align: center;
   margin-top: 10px;
@@ -157,10 +168,8 @@ button:hover {
 
 .register-container {
   width: 300px;
-
   margin: 0 auto; /* Center the container horizontally */
   padding: 20px;
-
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -170,10 +179,6 @@ button:hover {
 .register-form {
   display: flex;
   flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 15px;
 }
 
 label {
@@ -197,9 +202,7 @@ button[type="submit"] {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  height: auto;
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3;
-}
+  background
