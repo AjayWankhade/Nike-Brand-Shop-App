@@ -25,7 +25,7 @@ function Navigation() {
         <ul>
           <Link to="/">Menu</Link>
           <Link to="/about">About</Link>
-          <Link to="location">Location</Link>
+          <Link to="product">Product</Link>
           <Link to="contact">Contact</Link>
         </ul>
         <div>
