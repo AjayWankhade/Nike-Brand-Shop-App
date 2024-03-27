@@ -1,32 +1,30 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 function LoginComponent() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  function handleEmail(e) {
-    setEmail(e.target.value);
-  }
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid Email...")
+      .required("Email is Required..."),
+    password: Yup.string().required("Password is Required..."),
+  });
 
-  function handlePassword(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(values) {
     axios
       .post(`http://localhost:5000/api/auth/login`, {
-        email: email,
-        password: password,
+        email: values.email,
+        password: values.password,
       })
       .then((response) => {
         console.log("Login Successful", response.data);
-        // Display success toast notification
+
         toast.success("Login successful!");
         navigate("/product");
       })
@@ -36,32 +34,37 @@ function LoginComponent() {
         if (err.response.status === 401) {
           toast.error("Invalid email or password");
         } else {
-          toast.error("Invalid email or password.");
+          toast.error("error occured.", err);
         }
       });
   }
 
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input type="text" id="email" value={email} onChange={handleEmail} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePassword}
-          />
-        </div>
-        <button type="submit">Submit</button>
-        <p className="register-link">
-          Not yet registered? <Link to="/register">Register here.</Link>
-        </p>
-      </form>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form className="login-form">
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <Field type="text" id="email" name="email" />
+            <ErrorMessage name="email" component="div" className="error" />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <Field type="password" id="password" name="password" />
+            <ErrorMessage name="password" component="div" className="error" />
+          </div>
+
+          <button type="submit">Submit</button>
+          <p className="register-link">
+            Not yet registered? <Link to="/register">Register here.</Link>
+          </p>
+        </Form>
+      </Formik>
     </div>
   );
 }

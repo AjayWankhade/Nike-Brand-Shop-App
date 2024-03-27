@@ -1,90 +1,88 @@
-import { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function RegisterComponent() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  function handleEmail(e) {
-    setEmail(e.target.value);
-  }
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid Email").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
+  });
 
-  function handlePassword(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleConfirmPassword(e) {
-    setConfirmPassword(e.target.value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
+  function handleSubmit(values, { setSubmitting }) {
     axios
       .post(`http://localhost:5000/api/auth/register`, {
-        email: email,
-        password: password,
+        email: values.email,
+        password: values.password,
       })
       .then((response) => {
         console.log("Registration Successful", response.data);
-
         toast.success("Registration successful!");
         navigate("/login");
       })
       .catch((err) => {
         console.log("error occurred", err.response.data);
-
         if (err.response.status === 409) {
           toast.error("Email is already in use.");
         } else {
-          toast.error("Email is already in use.");
+          toast.error("An error occurred.");
         }
+      })
+      .finally(() => {
+        setSubmitting(false);
       });
   }
 
   return (
     <div className="register-container">
       <h2>Register</h2>
-      <form className="register-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmail}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePassword}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirm-password">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirm-password"
-            value={confirmPassword}
-            onChange={handleConfirmPassword}
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          confirmPassword: "",
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="register-form">
+            <div className="form-group">
+              <label htmlFor="email">Email:</label>
+              <Field type="email" id="email" name="email" required />
+              <ErrorMessage name="email" component="div" className="error" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <Field type="password" id="password" name="password" required />
+              <ErrorMessage name="password" component="div" className="error" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <Field
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                required
+              />
+              <ErrorMessage
+                name="confirmPassword"
+                component="div"
+                className="error"
+              />
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              Register
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 }
